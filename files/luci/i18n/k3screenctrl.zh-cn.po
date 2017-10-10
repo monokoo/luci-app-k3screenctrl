@@ -62,7 +62,7 @@ msgid "Refresh interval :"
 msgstr "刷新间隔："
 
 msgid "Screen refresh interval."
-msgstr "屏幕刷新间隔"
+msgstr "屏幕刷新间隔，过低的刷新间隔会增加系统负载"
 
 msgid "Hide Wireless password"
 msgstr "隐藏无线密码"
