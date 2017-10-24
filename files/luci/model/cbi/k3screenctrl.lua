@@ -25,54 +25,32 @@ o:value("600",translate("10 m"))
 o:value("3600",translate("60 m"))
 o.default = 10
 o.rmempty = false
-
 o = s:option(Flag, "psk_hide", translate("Hide Wireless password"))
 o.default = 0
-
 o = s:option(Flag, "cputemp", translate("Display CPU temperature"), translate("The first page shows the CPU temperature."))
 o.default = 0
-
-o = s:option(Flag, "usb3_disable", translate("Switch off USB3.0"), translate("Turn off USB3.0, reduce effects of interference to 2.4G wireless, <b><font color=\"red\">it works after rebooted</font></b>."))
-o.default = 1
-
-o = s:option(ListValue, "route_mode", translate("Operating Mode"), translate("Display partial data when APmode is enabled, Use Router Mode to disable AP mode."))
-o.default = "none"
-o:value("none",translate("Current Mode"))
-o:value("apmode",translate("AP Mode"))
-o:value("dhcpmode",translate("Router Mode"))
-
 o = s:option(ListValue, "router_uptime", translate("Other Setting"), translate("Display Mac Address or Lan IP Address or Router Uptime"))
 o:value("2",translate("Mac Address"))
 o:value("0",translate("Lan IP Address"))
 o:value("1",translate("Router Uptime"))
 o.default = 0
-
-o = s:option(ListValue, "webshell", translate("WebShell"), translate("Choose Which WebShell Service to Use"))
-o:value("ttyd",translate("ttyd"))
-o:value("shellinabox",translate("shellinabox"))
-o.default = "shellinabox"
-
 o = s:option(Button,"test_print",translate("Test"),translate("Execute k3screenctrl -t and return the result"))
 o.inputtitle = translate("Print info")
 o.write = function()
 	luci.sys.call("k3screenctrl -t > /tmp/k3screenctrl/test")
 	luci.http.redirect(luci.dispatcher.build_url("admin","system","k3screenctrl"))
 end
-
 s = m:section(TypedSection, "device_custom", translate("Device customization") ,translate("Customize the fifth page of device information"))
 s.template = "cbi/tblsection"
 s.addremove = true
 s.anonymous = true
-
 o = s:option(Value,"mac",translate("Device"))
 o.datatype = "macaddr"
 o.rmempty = false
 luci.sys.net.mac_hints(function(t,a)
 	o:value(t,"%s (%s)"%{a,t})
 end)
-
 o = s:option(Value,"name",translate("Hostname"))
-
 o = s:option(ListValue,"icon",translate("Icon"))
 o:value("0",translate("Auto"))
 o:value("1",translate("OnePlus"))
